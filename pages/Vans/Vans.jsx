@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
 
@@ -7,8 +6,6 @@ export function loader() {
 }
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [error, setError] = React.useState(null);
-
   const typeFilter = searchParams.get("type");
   const data = useLoaderData();
 
@@ -47,10 +44,6 @@ export default function Vans() {
       }
       return prevParams;
     });
-  }
-
-  if (error) {
-    return <h1 aria-live="assertive">There was an error: {error.message}</h1>;
   }
 
   return (

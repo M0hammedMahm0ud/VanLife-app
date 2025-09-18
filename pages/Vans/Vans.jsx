@@ -1,39 +1,20 @@
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLoaderData,
+  useSearchParams,
+  defer,
+  Await,
+} from "react-router-dom";
 import { getVans } from "../../api";
+import { Children } from "react";
 
 export function loader() {
-  return getVans();
+  return defer({ vans: getVans() });
 }
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get("type");
   const data = useLoaderData();
-
-  const displayedVans = typeFilter
-    ? data.filter((van) => van.type === typeFilter)
-    : data;
-
-  const vanElements = displayedVans.map((van) => (
-    <div key={van.id} className="van-tile">
-      <Link
-        to={van.id}
-        state={{
-          search: `?${searchParams.toString()}`,
-          type: typeFilter,
-        }}
-      >
-        <img src={van.imageUrl} />
-        <div className="van-info">
-          <h3>{van.name}</h3>
-          <p>
-            ${van.price}
-            <span>/day</span>
-          </p>
-        </div>
-        <i className={`van-type ${van.type} selected`}>{van.type}</i>
-      </Link>
-    </div>
-  ));
 
   function handleFilterChange(key, value) {
     setSearchParams((prevParams) => {
@@ -81,7 +62,41 @@ export default function Vans() {
           </button>
         ) : null}
       </div>
-      <div className="van-list">{vanElements}</div>
+      <Await resolve={data.vans}>
+        {(vans) => {
+          const displayedVans = typeFilter
+            ? vans.filter((van) => van.type === typeFilter)
+            : vans;
+
+          return (
+            <div className="van-list">
+              {displayedVans.map((van) => (
+                <div key={van.id} className="van-tile">
+                  <Link
+                    to={van.id}
+                    state={{
+                      search: `?${searchParams.toString()}`,
+                      type: typeFilter,
+                    }}
+                  >
+                    <img src={van.imageUrl} />
+                    <div className="van-info">
+                      <h3>{van.name}</h3>
+                      <p>
+                        ${van.price}
+                        <span>/day</span>
+                      </p>
+                    </div>
+                    <i className={`van-type ${van.type} selected`}>
+                      {van.type}
+                    </i>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          );
+        }}
+      </Await>
     </div>
   );
 }

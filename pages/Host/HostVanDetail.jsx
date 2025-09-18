@@ -1,10 +1,18 @@
-import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
+import {
+  defer,
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+  Await,
+} from "react-router-dom";
 import { getHostVans } from "../../api";
 import { AuthRequired } from "../../utiles";
+import { Suspense } from "react";
 
 export async function loader({ params, request }) {
   await AuthRequired(request);
-  return getHostVans(params.id);
+  return defer({ hostVanDetail: getHostVans(params.id) });
 }
 export default function HostVanDetail() {
   const currentVan = useLoaderData();
@@ -14,21 +22,15 @@ export default function HostVanDetail() {
     textDecoration: "underline",
     color: "#161616",
   };
-  return (
-    <section>
-      <Link to=".." relative="path" className="back-button">
-        &larr; <span>Back to all vans</span>
-      </Link>
-
+  function renderVanDetails(hVanD) {
+    return (
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
-          <img src={currentVan.imageUrl} />
+          <img src={hVanD.imageUrl} />
           <div className="host-van-detail-info-text">
-            <i className={`van-type van-type-${currentVan.type}`}>
-              {currentVan.type}
-            </i>
-            <h3>{currentVan.name}</h3>
-            <h4>${currentVan.price}/day</h4>
+            <i className={`van-type van-type-${hVanD.type}`}>{hVanD.type}</i>
+            <h3>{hVanD.name}</h3>
+            <h4>${hVanD.price}/day</h4>
           </div>
         </div>
 
@@ -53,8 +55,18 @@ export default function HostVanDetail() {
             Photos
           </NavLink>
         </nav>
-        <Outlet context={{ currentVan }} />
+        <Outlet context={{ hVanD }} />
       </div>
+    );
+  }
+  return (
+    <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
+      <Suspense fallback={<h2>Loading ...</h2>}>
+        <Await resolve={currentVan.hostVanDetail}>{renderVanDetails}</Await>
+      </Suspense>
     </section>
   );
 }

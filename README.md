@@ -13,8 +13,9 @@ It's a travel van rental app I've been building while following [@scrimba's Adva
 - Active nav link styling.
 - Protected routes.
 - Nested routes (multiple level deep).
-- using a real database (firebase).[![Firebase](https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg)](https://firebase.google.com/)
-- Deployed (Netlify). [![Netlify](https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg)](https://www.netlify.com/)
+- using a real database (firebase).<img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="40"/>
+- Deployed (Netlify).
+  <img src="https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg" alt="Netlify" width="40"/>
 
 ---
 

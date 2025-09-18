@@ -6,7 +6,7 @@ import {
   Await,
 } from "react-router-dom";
 import { getVans } from "../../api";
-
+import { Suspense } from "react";
 export function loader() {
   return defer({ vans: getVans() });
 }
@@ -91,7 +91,9 @@ export default function Vans() {
           </button>
         ) : null}
       </div>
-      <Await resolve={data.vans}>{renderVans}</Await>
+      <Suspense fallback={<h2>Loading Vans ...</h2>}>
+        <Await resolve={data.vans}>{renderVans}</Await>
+      </Suspense>
     </div>
   );
 }

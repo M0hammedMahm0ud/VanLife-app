@@ -1,6 +1,6 @@
 # VanLife app
 
-It's a travel van rental app I've been building while following [@scrimba's Advanced React course.](https://scrimba.com/learn-react-router-6-c06)
+It's a travel van rental app I've been building while following [@scrimba's React Router course.](https://scrimba.com/learn-react-router-6-c06)
 
 > instructor Bob Ziroll
 

@@ -6,7 +6,6 @@ import {
   Await,
 } from "react-router-dom";
 import { getVans } from "../../api";
-import { Children } from "react";
 
 export function loader() {
   return defer({ vans: getVans() });
@@ -26,7 +25,37 @@ export default function Vans() {
       return prevParams;
     });
   }
+  function renderVans(vans) {
+    const displayedVans = typeFilter
+      ? vans.filter((van) => van.type === typeFilter)
+      : vans;
 
+    return (
+      <div className="van-list">
+        {displayedVans.map((van) => (
+          <div key={van.id} className="van-tile">
+            <Link
+              to={van.id}
+              state={{
+                search: `?${searchParams.toString()}`,
+                type: typeFilter,
+              }}
+            >
+              <img src={van.imageUrl} />
+              <div className="van-info">
+                <h3>{van.name}</h3>
+                <p>
+                  ${van.price}
+                  <span>/day</span>
+                </p>
+              </div>
+              <i className={`van-type ${van.type} selected`}>{van.type}</i>
+            </Link>
+          </div>
+        ))}
+      </div>
+    );
+  }
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
@@ -62,41 +91,7 @@ export default function Vans() {
           </button>
         ) : null}
       </div>
-      <Await resolve={data.vans}>
-        {(vans) => {
-          const displayedVans = typeFilter
-            ? vans.filter((van) => van.type === typeFilter)
-            : vans;
-
-          return (
-            <div className="van-list">
-              {displayedVans.map((van) => (
-                <div key={van.id} className="van-tile">
-                  <Link
-                    to={van.id}
-                    state={{
-                      search: `?${searchParams.toString()}`,
-                      type: typeFilter,
-                    }}
-                  >
-                    <img src={van.imageUrl} />
-                    <div className="van-info">
-                      <h3>{van.name}</h3>
-                      <p>
-                        ${van.price}
-                        <span>/day</span>
-                      </p>
-                    </div>
-                    <i className={`van-type ${van.type} selected`}>
-                      {van.type}
-                    </i>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          );
-        }}
-      </Await>
+      <Await resolve={data.vans}>{renderVans}</Await>
     </div>
   );
 }

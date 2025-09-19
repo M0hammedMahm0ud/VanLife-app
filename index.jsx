@@ -27,8 +27,7 @@ import Login, {
 import Layout from "./components/Layout";
 import HostLayout from "./components/HostLayout";
 import Error from "./components/Error";
-import { AuthRequired } from "./utiles";
-
+import { AuthRequired } from "./utils";
 import "./server";
 
 const router = createBrowserRouter(

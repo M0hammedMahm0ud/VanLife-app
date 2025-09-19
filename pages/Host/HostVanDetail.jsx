@@ -6,13 +6,13 @@ import {
   useLoaderData,
   Await,
 } from "react-router-dom";
-import { getHostVans } from "../../api";
-import { AuthRequired } from "../../utiles";
+import { getVan } from "../../api";
+import { AuthRequired } from "../../utils";
 import { Suspense } from "react";
 
 export async function loader({ params, request }) {
   await AuthRequired(request);
-  return defer({ hostVanDetail: getHostVans(params.id) });
+  return defer({ hostVanDetail: getVan(params.id) });
 }
 export default function HostVanDetail() {
   const currentVan = useLoaderData();

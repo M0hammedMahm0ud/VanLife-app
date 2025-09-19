@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, defer, Await, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
-import { AuthRequired } from "../../utiles";
+import { AuthRequired } from "../../utils";
 import { BsStarFill } from "react-icons/bs";
 
 export async function loader({ request }) {
@@ -13,7 +13,6 @@ export default function Dashboard() {
   const loaderData = useLoaderData();
 
   function renderVanElements(vans) {
-    console.log(vans);
     const hostVansEls = vans.map((van) => (
       <div className="host-van-single" key={van.id}>
         <img src={van.imageUrl} alt={`Photo of ${van.name}`} />

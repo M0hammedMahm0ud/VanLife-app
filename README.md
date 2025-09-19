@@ -1,6 +1,6 @@
 # VanLife app
 
-It's a travel van rental app I've been building while following [@scrimba's Advanced React course.](https://scrimba.com/learn-react-router-6-c06)
+It's a travel van rental app I've been building while following [@scrimba's React Router course.](https://scrimba.com/learn-react-router-6-c06)
 
 > instructor Bob Ziroll
 
@@ -13,9 +13,8 @@ It's a travel van rental app I've been building while following [@scrimba's Adva
 - Active nav link styling.
 - Protected routes.
 - Nested routes (multiple level deep).
-- using a real database (firebase).<img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="40"/>
-- Deployed (Netlify).
-  <img src="https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg" alt="Netlify" width="40"/>
+- using a real database (firebase).  <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="20"/>
+- Deployed (Netlify).  <img src="https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg" alt="Netlify" width="20"/>
 
 ---
 

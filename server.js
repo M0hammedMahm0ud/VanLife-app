@@ -9,7 +9,7 @@ createServer({
   seeds(server) {
     server.create("user", {
       id: "123",
-      email: "mo@.com",
+      email: "mo@m.com",
       password: "m123",
       name: "Bob",
     });

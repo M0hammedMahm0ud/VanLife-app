@@ -4,9 +4,11 @@ It's a travel van rental app I've been building while following [@scrimba's Reac
 
 > instructor Bob Ziroll
 
----
 #### [Live Demo](https://vanlife-sc-react-router.netlify.app/)
 #### [Figma Design](https://www.figma.com/design/YQZ8Ct9NeE4AYioMP5FztD/-VanLife--Copy-?node-id=0-1&t=Kj0s1WbEBd0ugt9H-1)
+> for host page
+> simply use `mo@.com` for email and `m123` for password
+---
 
 ## Key Features ✨
 

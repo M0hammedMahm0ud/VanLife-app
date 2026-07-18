@@ -9,9 +9,9 @@ createServer({
   seeds(server) {
     server.create("user", {
       id: "123",
-      email: "mo@m.com",
-      password: "m123",
-      name: "Mohammed",
+      email: "m@m.com",
+      password: "123",
+      name: "moo",
     });
   },
 
@@ -31,7 +31,7 @@ createServer({
         return new Response(
           401,
           {},
-          { message: "No user with those credentials found!" }
+          { message: "No user with those credentials found!" },
         );
       }
 

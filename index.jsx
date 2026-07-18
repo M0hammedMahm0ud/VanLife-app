@@ -55,7 +55,12 @@ const router = createBrowserRouter(
       />
 
       <Route path="host" element={<HostLayout />}>
-        <Route index element={<Dashboard />} loader={dashboardLoader} />
+        <Route
+          index
+          element={<Dashboard />}
+          errorElement={<Error />}
+          loader={dashboardLoader}
+        />
         <Route
           path="income"
           element={<Income />}
@@ -96,8 +101,8 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 function App() {
